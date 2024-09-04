@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
       flexGrow: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      gap: 20,
     },
     containerBasic: {
         flex: 1,
@@ -12,7 +13,6 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         flex: 1,
-        height: 200,
         alignItems: 'center',
         gap: 5,
     },

@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
+import styles from "./styles";
+import peopleData from "./assets/data.json";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+interface PeopleData{
+  name: string;
+  email: string;
+  photo_url: string;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  function avatarUI(student: PeopleData){
+    return (
+      <View style={styles.cardContainer}>
+        <Image 
+          style={styles.portrait}
+          source={{uri: student.photo_url}} 
+        />
+        <View style={styles.containerBasic}>
+          <Text style={[styles.bigger, styles.bold]}>{student.name}</Text>
+          <Text style={styles.muted}>{student.email}</Text>
+        </View>
+      </View>
+    );
+  }
+
+  const avatarList = peopleData.map(people => avatarUI(people));
+  
+  return (
+    <ScrollView
+      contentContainerStyle={[styles.container, styles.paddingBig]}
+    >
+      <Text style={[styles.title, styles.paddingBig]}>Students</Text>
+      {avatarList}
+    </ScrollView>
+  );
+}
